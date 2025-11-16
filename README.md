@@ -26,7 +26,7 @@ A minimal, retro 90s-style vanish chat web app built with Flask & Socket.IO — 
 ### Install & Run
 
 ```bash
-git clone https://github.com/yourusername/vanish-chat.git
+git clone https://github.com/3RA31M/vanish-chat.git
 cd vanish-chat
 python3 -m venv venv
 source venv/bin/activate  # On Windows: venv\Scripts\activate
