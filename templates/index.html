@@ -2,32 +2,61 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>🕹️ Vanish Portal</title>
+  <title> VANISH NODE </title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="/static/style.css">
 </head>
 <body>
-  <pre>
- _______            _____                ________        .__        
-\   _  \ ___  ___ /  |  |  _____   ____ \_____  \  _____|__|____   
-/  /_\  \\  \/  //   |  |_/     \ /    \  _(__  < /  ___/  \__  \  
-\  \_/   \>    </    ^   /  Y Y  \   |  \/       \\___ \|  |/ __ \_
- \_____  /__/\_ \____   ||__|_|  /___|  /______  /____  >__(____  /
-       \/      \/    |__|      \/     \/       \/     \/        \/ 
-                                        brabim gautam © 
-  </pre>
+<div class = "name">
+<pre  >░██    ░██    ░███    ░███    ░██ ░██████  ░██████   ░██     ░██          ░███    ░██   ░██████   ░███████   ░██████████ 
+░██    ░██   ░██░██   ░████   ░██   ░██   ░██   ░██  ░██     ░██          ░████   ░██  ░██   ░██  ░██   ░██  ░██         
+░██    ░██  ░██  ░██  ░██░██  ░██   ░██  ░██         ░██     ░██          ░██░██  ░██ ░██     ░██ ░██    ░██ ░██         
+░██    ░██ ░█████████ ░██ ░██ ░██   ░██   ░████████  ░██████████          ░██ ░██ ░██ ░██     ░██ ░██    ░██ ░█████████  
+ ░██  ░██  ░██    ░██ ░██  ░██░██   ░██          ░██ ░██     ░██          ░██  ░██░██ ░██     ░██ ░██    ░██ ░██         
+  ░██░██   ░██    ░██ ░██   ░████   ░██   ░██   ░██  ░██     ░██          ░██   ░████  ░██   ░██  ░██   ░██  ░██         
+   ░███    ░██    ░██ ░██    ░███ ░██████  ░██████   ░██     ░██          ░██    ░███   ░██████   ░███████   ░██████████ 
+                                                                                                                         
+                                                                                                                         
+                                                                                                                         <sub>version 1.O</sub></pre> 
+</div>
+<br>
+<div class="window">
+    <div class="window-header">
+      <span class="dot red"></span>
+      <span class="dot yellow"></span>
+      <span class="dot green"></span>
+    </div>
+    <div class="window-body">
+<h1>Hello, friend!</h1>
 
-  <h2>💬 Welcome to Vanish Chat</h2>
-  <p>Enter a room code to join or create a new one.</p>
+<p>
+Welcome to <strong>VANISH NODE</strong> a web app used for messaging.
+Think of VANISH NODE like <em>Among Us</em>.
+You enter a room code given by your friend to join a match.
+Similarly, in VANISH NODE, you can either generate your own room code
+or enter a code shared by your friend to join a specific room and start gossiping.
+</p>
 
-  <form id="joinForm">
-    <label for="roomCode">🔑 Room Code:</label>
-    <input type="text" id="roomCode" placeholder="e.g. ABC123" required maxlength="10">
-    <button type="submit">Join Room</button>
-  </form>
+<hr>
 
-  <p>or...</p>
+<p>
+Here comes the fun part: your message disappears after 45 seconds.
+Think of it like Snapchat  |
+What are you waiting for go join the room now....!
+</p>
+</div>
+</div>
 
-  <button onclick="createRoom()">🎲 Create Random Room</button>
+
+<form id="room_code_bar"><br><br><br>
+  <label for="roomCode">Enter your Room Code:</label>
+  <input type="number" id="roomCode" placeholder="room code" required>
+  <button type="submit">JOIN ROOM</button><br><hr>
+</form>
+
+<form id="generate">
+  Click here to create room → <button type="button" class="secondary-btn" onclick="createRoom()">GENERATE ROOM CODE</button>
+</form>
 
   <script>
     function generateRoomCode(length = 6) {
@@ -46,7 +75,7 @@ function createRoom() {
 }
 
 
-    document.getElementById("joinForm").onsubmit = function(e) {
+    document.getElementById("room_code_bar").onsubmit = function(e) {
       e.preventDefault();
       const code = document.getElementById("roomCode").value.trim().toUpperCase();
       if (code) {
@@ -54,5 +83,6 @@ function createRoom() {
       }
     };
   </script>
+
 </body>
 </html>
