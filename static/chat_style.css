@@ -55,6 +55,20 @@ body {
   padding: 20px 30px;
 }
 
+#room-info {
+  text-align: center;
+  color: #aaa;
+  font-size: 24px;
+  margin-bottom: 1px;
+
+}
+
+#room-code {
+  color: #00ffcc;
+  font-weight: bold;
+  letter-spacing: 2px;
+}
+
 #input-form input {
   flex: 1;
   padding: 10px 16px;
@@ -77,3 +91,9 @@ body {
 #input-form button:hover {
   background: rgba(0,255,0,0.1);
 }
+
+/* @media (max-width: 500px) {
+
+            Mobile UI ain't finished yet 
+} */
+

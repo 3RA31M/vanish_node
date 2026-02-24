@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <title> 🪩 VANISH NODE </title>
   <link rel="stylesheet" href="/static/chat_style.css">
+  <script src="https://cdn.socket.io/4.7.5/socket.io.min.js"></script>
 </head>
 <body>
   <div id ="container">
@@ -18,6 +19,9 @@
    ░███    ░██    ░██ ░██    ░███ ░██████  ░██████   ░██     ░██          ░██    ░███   ░██████   ░███████   ░██████████ 
                                                                                                                                                                                                                                         
         </pre>
+          <div id="room-info">
+            Room Code: <span id="room-code">{{ room }}</span>
+          </div>
         <hr>  
       </div>
       
@@ -30,4 +34,81 @@
         <button id="send-btn" type="submit">Send</button>
      </form>    
   </div>
+
+   <script>
+    const socket = io();
+
+    const urlParams = new URLSearchParams(window.location.search);
+    const room = urlParams.get('room');
+
+    let username = null;
+
+    socket.emit('join', { room });
+
+    socket.on('assign_username', (data) => {
+      username = data.username;
+      console.log('Your username:', username);
+    });
+
+    socket.on('receive_message', (data) => {
+      addMessage(data);
+    });
+
+    socket.on('user_joined', (data) => {
+      addSystemMessage(`${data.username} joined the room.`);
+    });
+
+    const chatBox = document.getElementById('chat-area');
+
+    function addMessage(data) {
+      const msgDiv = document.createElement('div');
+      msgDiv.classList.add('message');
+
+      if (data.username === username) {
+        msgDiv.classList.add('self');
+      }
+
+      msgDiv.innerHTML = `<strong>${data.username}</strong>: ${escapeHtml(data.message)}`;
+      chatBox.appendChild(msgDiv);
+      chatBox.scrollTop = chatBox.scrollHeight;
+
+      // Vanish after 45 seconds
+      setTimeout(() => {
+        msgDiv.remove();
+      }, 45000);
+    }
+
+    function addSystemMessage(msg) {
+      const sysDiv = document.createElement('div');
+      sysDiv.classList.add('message');
+      sysDiv.style.color = '#ff5555';
+      sysDiv.style.fontStyle = 'italic';
+      sysDiv.textContent = msg;
+      chatBox.appendChild(sysDiv);
+      chatBox.scrollTop = chatBox.scrollHeight;
+    }
+
+    document.getElementById('input-form').addEventListener('submit', e => {
+      e.preventDefault();
+      const inputField = document.getElementById('message-input');
+      const message = inputField.value.trim();
+      if (!message || !username) return;
+      socket.emit('send_message', { username, message, room });
+      inputField.value = '';
+    });
+
+    // Basic escape to avoid HTML injection
+    function escapeHtml(text) {
+      return text.replace(/[&<>"']/g, function(m) {
+        return {
+          '&': '&amp;',
+          '<': '&lt;',
+          '>': '&gt;',
+          '"': '&quot;',
+          "'": '&#39;'
+        }[m];
+      });
+    }
+  </script>
 </body>    
+</html>

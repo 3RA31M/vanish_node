@@ -50,7 +50,7 @@ What are you waiting for go join the room now....!
 
 <form id="room_code_bar"><br><br><br>
   <label for="roomCode">Enter your Room Code:</label>
-  <input type="number" id="roomCode" placeholder="room code" required>
+  <input type="text" id="roomCode" placeholder="room code" required>
   <button type="submit">JOIN ROOM</button><br><hr>
 </form>
 
@@ -69,9 +69,10 @@ What are you waiting for go join the room now....!
      return code;
     }
 
-function createRoom() {
-  const code = generateRoomCode();
-  window.location.href = `/chat?room=${code}`;
+async function createRoom() {
+  const res = await fetch('/create-room');
+  const data = await res.json();
+  window.location.href = `/chat?room=${data.room}`;
 }
 
 
